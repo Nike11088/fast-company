@@ -1,22 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import User from './user'
 import { paginate } from '../utils/paginate'
 import Pagination from './pagination'
 import PropTypes from 'prop-types'
+import GroupList from './groupList'
+import api from '../api'
 
-const Users = ({ users, onDelete, onToogleBookMark }) => {
-    const count = users.length
-    const pageSize = 4
+const Users = ({ users: allUsers, onDelete, onToogleBookMark }) => {
     const [currentPage, setCurrentPage] = useState(1)
+    const [professions, setProfessions] = useState()
+    const [selectedProf, setSelectedProf] = useState()
+    const pageSize = 4
+
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfessions(data))
+    }, [])
+
+    const handleProfessionSelect = (item) => {
+        setSelectedProf(item)
+    }
+
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
     }
 
-    const userCrop = paginate(users, currentPage, pageSize)
+    const filteredUsers = selectedProf
+        ? allUsers.filter((user) => user.profession === selectedProf)
+        : allUsers
+    const count = (filteredUsers && filteredUsers.length) || 0
+    const userCrop = paginate(filteredUsers, currentPage, pageSize)
+    const clearFilter = () => {
+        setSelectedProf()
+    }
 
     return (
         <>
-            {users.length > 0 && (
+            {professions && (
+                <>
+                    <GroupList
+                        selectedItem={selectedProf}
+                        items={professions}
+                        onItemSelect={handleProfessionSelect}
+                    />
+                    <button
+                        className="btn btn-secondary mt-2"
+                        onClick={clearFilter}
+                    >
+                        Очистить
+                    </button>
+                </>
+            )}
+
+            {allUsers.length > 0 && (
                 <table className="table">
                     <thead>
                         <tr>
