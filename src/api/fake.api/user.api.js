@@ -1,4 +1,4 @@
-import { professions } from './professions.api'
+import { professionsObject as professions } from './professions.api'
 
 const qualities = {
     tedious: {
@@ -144,6 +144,13 @@ const users = [
     }
 ]
 
-export function fetchAll() {
-    return users
+const fetchAll = () =>
+    new Promise((resolve) => {
+        setTimeout(function () {
+            resolve(users)
+        }, 100)
+    })
+
+export default {
+    fetchAll
 }
