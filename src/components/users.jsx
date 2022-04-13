@@ -31,7 +31,7 @@ const Users = ({ users: allUsers, onDelete, onToogleBookMark }) => {
     }
 
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) => user.profession === selectedProf)
+        ? allUsers.filter((user) => user.profession._id === selectedProf._id)
         : allUsers
     const count = filteredUsers && filteredUsers.length
     const userCrop = paginate(filteredUsers, currentPage, pageSize)
