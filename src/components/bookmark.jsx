@@ -9,7 +9,7 @@ const BookMark = ({ status, ...rest }) => {
                 'bi cursor-pointer' +
                 (status ? ' bi-bookmark-fill' : ' bi-bookmark')
             }
-            onClick={() => rest.onToogleBookMark(rest.userId)}
+            onClick={() => rest.onClick(rest.userId)}
         ></i>
     )
 }
