@@ -22,9 +22,9 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
     const renderSortArrow = (path) => {
         if (sortedColumn.path && sortedColumn.path === path) {
             return sortedColumn.order === 'asc' ? (
-                <i className="bi bi-caret-down-fill"></i>
-            ) : (
                 <i className="bi bi-caret-up-fill"></i>
+            ) : (
+                <i className="bi bi-caret-down-fill"></i>
             )
         } else return ''
     }
