@@ -4,7 +4,7 @@ import api from '../api'
 import QualitiesList from './qualitiesList'
 import PropTypes from 'prop-types'
 
-const UserCard = ({ userId }) => {
+const UserPage = ({ userId }) => {
     const history = useHistory()
     const [user, setUser] = useState()
     useEffect(() => api.users.getById(userId).then((user) => setUser(user)), [])
@@ -29,8 +29,8 @@ const UserCard = ({ userId }) => {
     return 'Loading...'
 }
 
-UserCard.propTypes = {
-    userId: PropTypes.string
+UserPage.propTypes = {
+    userId: PropTypes.string.isRequired
 }
 
-export default UserCard
+export default UserPage

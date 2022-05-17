@@ -13,7 +13,6 @@ const UserTable = ({
     onDelete
 }) => {
     const columns = {
-        // name: { path: 'name', name: 'Имя' },
         name: {
             name: 'Имя',
             component: (user) => (

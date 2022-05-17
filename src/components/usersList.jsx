@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { paginate } from '../utils/paginate'
 import Pagination from './pagination'
 import GroupList from './groupList'
 import api from '../api'
 import SearchStatus from './searchStatus'
 import UserTable from './usersTable'
+import UserPage from './userPage'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-const Users = () => {
+const UsersList = () => {
+    const params = useParams()
+    const { userId } = params
+
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
@@ -16,9 +22,7 @@ const Users = () => {
 
     const [users, setUsers] = useState()
 
-    useEffect(() => {
-        api.users.fetchAll().then((data) => setUsers(data))
-    }, [])
+    useEffect(() => api.users.fetchAll().then((data) => setUsers(data)), [])
 
     const handleDelete = (userId) => {
         setUsers((prevState) => prevState.filter((user) => user._id !== userId))
@@ -53,7 +57,9 @@ const Users = () => {
         setSortBy(item)
     }
 
-    if (users) {
+    if (userId) {
+        return <UserPage userId={userId} />
+    } else if (users) {
         const filteredUsers = selectedProf
             ? users.filter((user) => user.profession._id === selectedProf._id)
             : users
@@ -111,4 +117,8 @@ const Users = () => {
     return 'Loading...'
 }
 
-export default Users
+UsersList.propTypes = {
+    users: PropTypes.array
+}
+
+export default UsersList
