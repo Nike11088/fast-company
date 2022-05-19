@@ -7,7 +7,6 @@ import GroupList from '../../common/groupList'
 import SearchStatus from '../../ui/searchStatus'
 import UserTable from '../../ui/usersTable'
 import UserPage from '../userPage/userPage'
-import Search from '../../common/search'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -47,6 +46,7 @@ const UsersListPage = () => {
 
     const handleProfessionSelect = (item) => {
         setSelectedProf(item)
+        setSearchValue('')
     }
 
     const handlePageChange = (pageIndex) => {
@@ -57,10 +57,11 @@ const UsersListPage = () => {
         setSortBy(item)
     }
 
-    const startSearch = (searchValue) => {
+    const handleChangeValue = (e) => {
         setSelectedProf()
         setCurrentPage(1)
-        setSearchValue(searchValue)
+        setSearchValue(e.target.value)
+        console.log('handleChangeValue')
     }
 
     const filterUsers = () => {
@@ -119,10 +120,15 @@ const UsersListPage = () => {
                 )}
                 <div className="d-flex flex-column w-100">
                     <SearchStatus length={count} />
-                    <Search
-                        onStartSearch={startSearch}
-                        placeholder="Поиск..."
-                    />
+                    <div className="input-group">
+                        <input
+                            type="search"
+                            className="form-control"
+                            placeholder="Поиск..."
+                            onChange={handleChangeValue}
+                            value={searchValue}
+                        />
+                    </div>
                     {count > 0 && (
                         <UserTable
                             users={usersCrop}

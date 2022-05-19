@@ -5,12 +5,10 @@ const Search = ({ onStartSearch, placeholder }) => {
     const [searchValue, setSearchValue] = useState('')
 
     const handleChangeValue = (e) => {
-        console.log(e.target.value)
         setSearchValue(e.target.value)
     }
 
     const handleStartSearch = () => {
-        console.log(searchValue)
         onStartSearch(searchValue)
         setSearchValue('')
     }
