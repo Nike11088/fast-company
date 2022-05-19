@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import TextField from '../components/textField'
 import { validator } from '../utils/validator'
 
@@ -52,9 +52,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const isValid = validate()
-        if (!isValid) return
-        console.log(data)
+        validate()
     }
 
     return (
@@ -81,7 +79,7 @@ const Login = () => {
                         <button
                             type="submit"
                             disabled={!isValid}
-                            className="btn btn-primary w-100 mx-auto"
+                            className="btn btn-primary w-100"
                         >
                             Submit
                         </button>
