@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import '../index.css'
+import '../../../index.css'
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
     const [sortedColumn, setSortedColumn] = useState({})

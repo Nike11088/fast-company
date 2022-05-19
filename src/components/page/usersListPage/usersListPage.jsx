@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { paginate } from '../utils/paginate'
-import api from '../api'
-import Pagination from './pagination'
-import GroupList from './groupList'
-import SearchStatus from './searchStatus'
-import UserTable from './usersTable'
-import UserPage from './userPage'
-import Search from './search'
+import { paginate } from '../../../utils/paginate'
+import api from '../../../api'
+import Pagination from '../../common/pagination'
+import GroupList from '../../common/groupList'
+import SearchStatus from '../../ui/searchStatus'
+import UserTable from '../../ui/usersTable'
+import UserPage from '../userPage/userPage'
+import Search from '../../common/search'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
-const UsersList = () => {
+const UsersListPage = () => {
     const params = useParams()
 
     const [currentPage, setCurrentPage] = useState(1)
@@ -147,8 +147,8 @@ const UsersList = () => {
     return 'Loading...'
 }
 
-UsersList.propTypes = {
+UsersListPage.propTypes = {
     users: PropTypes.array
 }
 
-export default UsersList
+export default UsersListPage
