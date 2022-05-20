@@ -16,7 +16,7 @@ const UsersListPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
-    const [searchValue, setSearchValue] = useState('')
+    const [searchQuery, setSearchQuery] = useState('')
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
     const [users, setUsers] = useState()
 
@@ -26,7 +26,7 @@ const UsersListPage = () => {
     }, [])
     useEffect(() => {
         setCurrentPage(1)
-    }, [selectedProf])
+    }, [selectedProf, searchQuery])
 
     const { userId } = params
     const pageSize = 8
@@ -45,8 +45,8 @@ const UsersListPage = () => {
     }
 
     const handleProfessionSelect = (item) => {
+        if (setSearchQuery !== '') setSearchQuery('')
         setSelectedProf(item)
-        setSearchValue('')
     }
 
     const handlePageChange = (pageIndex) => {
@@ -57,25 +57,23 @@ const UsersListPage = () => {
         setSortBy(item)
     }
 
-    const handleChangeValue = (e) => {
-        setSelectedProf()
-        setCurrentPage(1)
-        setSearchValue(e.target.value)
-        console.log('handleChangeValue')
+    const handleSearchQuery = (e) => {
+        setSelectedProf(undefined)
+        setSearchQuery(e.target.value)
     }
 
     const filterUsers = () => {
-        if (selectedProf) {
-            return users.filter(
-                (user) => user.profession._id === selectedProf._id
-            )
-        }
-
-        if (searchValue) {
+        if (searchQuery) {
             return users.filter((user) =>
                 user.name
                     .toLowerCase()
-                    .includes(searchValue.trim().toLowerCase())
+                    .includes(searchQuery.trim().toLowerCase())
+            )
+        }
+
+        if (selectedProf) {
+            return users.filter(
+                (user) => user.profession._id === selectedProf._id
             )
         }
 
@@ -87,9 +85,6 @@ const UsersListPage = () => {
     } else if (users) {
         console.log('users')
         const filteredUsers = filterUsers()
-        // const filteredUsers = selectedProf
-        //     ? users.filter((user) => user.profession._id === selectedProf._id)
-        //     : users
         const count = filteredUsers && filteredUsers.length
         const sortedUsers = _.orderBy(
             filteredUsers,
@@ -125,8 +120,8 @@ const UsersListPage = () => {
                             type="search"
                             className="form-control"
                             placeholder="Поиск..."
-                            onChange={handleChangeValue}
-                            value={searchValue}
+                            onChange={handleSearchQuery}
+                            value={searchQuery}
                         />
                     </div>
                     {count > 0 && (
