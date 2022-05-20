@@ -83,7 +83,6 @@ const UsersListPage = () => {
     if (userId) {
         return <UserPage userId={userId} />
     } else if (users) {
-        console.log('users')
         const filteredUsers = filterUsers()
         const count = filteredUsers && filteredUsers.length
         const sortedUsers = _.orderBy(
