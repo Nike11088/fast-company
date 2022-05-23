@@ -84,7 +84,6 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         validate()
-        console.log(data)
     }
 
     return (

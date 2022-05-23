@@ -10,7 +10,7 @@ const UserPage = ({ userId }) => {
     useEffect(() => api.users.getById(userId).then((user) => setUser(user)), [])
 
     const handleSave = () => {
-        history.push('/users')
+        history.push(`/users/${userId}/edit`)
     }
 
     if (user) {
@@ -21,7 +21,7 @@ const UserPage = ({ userId }) => {
                 <Qualities qualities={user.qualities} />
                 <div>Встретился, раз: {user.completedMeetings}</div>
                 <h3>Оценка: {user.rate}</h3>
-                <button onClick={() => handleSave()}>Все пользователи</button>
+                <button onClick={() => handleSave()}>Изменить</button>
             </>
         )
     }
