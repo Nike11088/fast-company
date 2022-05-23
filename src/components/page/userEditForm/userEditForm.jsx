@@ -150,8 +150,8 @@ const UserEditForm = () => {
                             Обновить
                         </button>
                     </form>
-                </div>{' '}
-            </div>{' '}
+                </div>
+            </div>
         </div>
     ) : (
         'Loading'
