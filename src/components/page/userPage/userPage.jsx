@@ -10,7 +10,7 @@ const UserPage = ({ userId }) => {
     useEffect(() => api.users.getById(userId).then((user) => setUser(user)), [])
 
     const handleSave = () => {
-        history.push(`/users/${userId}/edit`)
+        history.push(history.location.pathname + '/edit')
     }
 
     if (user) {
