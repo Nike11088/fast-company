@@ -7,6 +7,7 @@ import GroupList from '../../common/groupList'
 import SearchStatus from '../../ui/searchStatus'
 import UserTable from '../../ui/usersTable'
 import UserPage from '../userPage/userPage'
+import { useUser } from '../../../hooks/useUsers'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 
@@ -18,9 +19,9 @@ const UsersListPage = () => {
     const [selectedProf, setSelectedProf] = useState()
     const [searchQuery, setSearchQuery] = useState('')
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
-    const [users, setUsers] = useState()
+    const { users } = useUser()
+    console.log(users)
 
-    useEffect(() => api.users.fetchAll().then((data) => setUsers(data)), [])
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
     }, [])
@@ -32,7 +33,8 @@ const UsersListPage = () => {
     const pageSize = 8
 
     const handleDelete = (userId) => {
-        setUsers((prevState) => prevState.filter((user) => user._id !== userId))
+        // setUsers((prevState) => prevState.filter((user) => user._id !== userId))
+        console.log(userId)
     }
 
     const handleToogleBookMark = (id) => {
@@ -40,7 +42,8 @@ const UsersListPage = () => {
         if (user) {
             user.bookmark = !user.bookmark
             const updatedUsers = [...users]
-            setUsers(updatedUsers)
+            // setUsers(updatedUsers)
+            console.log(updatedUsers)
         }
     }
 
