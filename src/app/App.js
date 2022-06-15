@@ -7,6 +7,7 @@ import Users from './layouts/users'
 import { ProfessionProvider } from './hooks/useProfession'
 import { ToastContainer } from 'react-toastify'
 import { QualitiesProvider } from './hooks/useQualities'
+// "apiEndpoint": "http://localhost:4000/api/v1/"
 
 const App = () => {
     return (
