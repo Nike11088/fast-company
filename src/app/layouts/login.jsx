@@ -23,9 +23,8 @@ const Login = () => {
                             <h3 className="mb-4">Регистрация</h3>
                             <RegisterForm />
                             <p>
-                                Уже зарегистриованы?
+                                Уже зарегистриованы?{' '}
                                 <a role="button" onClick={toggleFormType}>
-                                    {' '}
                                     Войдите
                                 </a>
                             </p>
@@ -35,9 +34,8 @@ const Login = () => {
                             <h3 className="mb-4">Вход</h3>
                             <LoginForm />
                             <p>
-                                Не зарегистриованы?
+                                Не зарегистриованы?{' '}
                                 <a role="button" onClick={toggleFormType}>
-                                    {' '}
                                     Регистрация
                                 </a>
                             </p>
