@@ -25,7 +25,7 @@ const Login = () => {
                             <p>
                                 Уже зарегистриованы?{' '}
                                 <a role="button" onClick={toggleFormType}>
-                                    Войдите
+                                    Войти
                                 </a>
                             </p>
                         </>

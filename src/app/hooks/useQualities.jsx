@@ -87,7 +87,7 @@ export const QualitiesProvider = ({ children }) => {
                 deleteQuality
             }}
         >
-            {children}
+            {!isLoading ? children : 'Loading123...'}
         </QualitiesContex.Provider>
     )
 }

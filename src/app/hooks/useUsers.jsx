@@ -10,7 +10,7 @@ export const useUser = () => {
 }
 
 const UserProvider = ({ children }) => {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState(null)
     const [isLoading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     useEffect(() => {
@@ -31,13 +31,16 @@ const UserProvider = ({ children }) => {
             errorCatcher(error)
         }
     }
+    function getUserById(userId) {
+        return users.find((u) => u._id === userId)
+    }
     function errorCatcher(error) {
         const { message } = error.response.data
         setError(message)
         setLoading(false)
     }
     return (
-        <UserContext.Provider value={{ users }}>
+        <UserContext.Provider value={{ users, getUserById, getUsers }}>
             {!isLoading ? children : 'Loading...'}
         </UserContext.Provider>
     )
