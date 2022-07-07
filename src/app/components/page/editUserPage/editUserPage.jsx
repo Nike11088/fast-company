@@ -19,7 +19,9 @@ const EditUserPage = () => {
     const [errors, setErrors] = useState({})
 
     const { qualities, isLoading: qualitiesLoading } = useQualities()
+    const qualitiesList = transformData(qualities)
     const { professions, isLoading: professionsLoading } = useProfessions()
+    const professionsList = transformData(professions)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -33,7 +35,7 @@ const EditUserPage = () => {
 
         history.push(`/users/${data._id}`)
     }
-    const transformData = (data) => {
+    function transformData(data) {
         return data.map((qual) => ({ label: qual.name, value: qual._id }))
     }
     const getQualitiesListByIds = (qualitiesIds) => {
@@ -51,7 +53,6 @@ const EditUserPage = () => {
 
     useEffect(() => {
         if (!qualitiesLoading && !professionsLoading && currentUser && !data) {
-            debugger
             const userQualities = getQualitiesListByIds(currentUser.qualities)
             setData({
                 ...currentUser,
@@ -61,7 +62,6 @@ const EditUserPage = () => {
     }, [qualitiesLoading, professionsLoading, currentUser, data])
     useEffect(() => {
         if (data && isLoading) {
-            debugger
             setIsLoading(false)
         }
     }, [data])
@@ -122,7 +122,7 @@ const EditUserPage = () => {
                             <SelectField
                                 label="Выбери свою профессию"
                                 defaultOption="Choose..."
-                                options={transformData(professions)}
+                                options={professionsList}
                                 name="profession"
                                 onChange={handleChange}
                                 value={data.profession}
@@ -140,7 +140,7 @@ const EditUserPage = () => {
                             />
                             <MultiSelectField
                                 defaultValue={data.qualities}
-                                options={transformData(qualities)}
+                                options={qualitiesList}
                                 onChange={handleChange}
                                 name="qualities"
                                 label="Выберите ваши качества"
