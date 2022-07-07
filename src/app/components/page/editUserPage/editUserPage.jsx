@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { validator } from '../../../utils/validator'
 import TextField from '../../common/form/textField'
 import SelectField from '../../common/form/selectField'
 import RadioField from '../../common/form/radioField'
 import MultiSelectField from '../../common/form/multiSelectField'
 import BackHistoryButton from '../../common/backButton'
-import { useQualities } from '../../../hooks/useQualities'
 import { useProfessions } from '../../../hooks/useProfession'
 import { useAuth } from '../../../hooks/useAuth'
+import {
+    getQualities,
+    getQualitiesLoadingStatus
+} from '../../../store/qualities'
 
 const EditUserPage = () => {
     const history = useHistory()
@@ -18,7 +22,9 @@ const EditUserPage = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [errors, setErrors] = useState({})
 
-    const { qualities, isLoading: qualitiesLoading } = useQualities()
+    const qualities = useSelector(getQualities())
+    const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
+
     const qualitiesList = transformData(qualities)
     const { professions, isLoading: professionsLoading } = useProfessions()
     const professionsList = transformData(professions)
