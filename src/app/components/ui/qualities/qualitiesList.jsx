@@ -12,7 +12,7 @@ const QualitiesList = ({ qualities }) => {
     const dispatch = useDispatch()
     const isLoading = useSelector(getQualitiesLoadingStatus())
     const qualitiesList = useSelector(getQualitiesByIds(qualities))
-    console.log(qualitiesList)
+
     useEffect(() => {
         dispatch(loadQualitiesList())
     }, [])

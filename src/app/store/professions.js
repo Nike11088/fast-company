@@ -25,6 +25,17 @@ const professionsSlice = createSlice({
     }
 })
 
+export const getProfessions = () => (state) => {
+    return state.professions.entities
+}
+
+export const getProfessionById = (id) => (state) => {
+    return state.professions.entities.find((prof) => prof._id === id)
+}
+
+export const getProfessionsLoadingStatus = () => (state) =>
+    state.professions.isLoading
+
 const { reducer: professionsReducer, actions } = professionsSlice
 const { professionsRequested, professionsReceived, professionsRequestFailed } =
     actions

@@ -7,15 +7,21 @@ import SearchStatus from '../../ui/searchStatus'
 import UserTable from '../../ui/usersTable'
 import UserPage from '../userPage/userPage'
 import { useUser } from '../../../hooks/useUsers'
-import { useProfessions } from '../../../hooks/useProfession'
 import { useAuth } from '../../../hooks/useAuth'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import {
+    getProfessions,
+    getProfessionsLoadingStatus
+} from '../../../store/professions'
+import { useSelector } from 'react-redux'
 
 const UsersListPage = () => {
     const params = useParams()
     const { currentUser } = useAuth()
-    const { isLoading: professionsLoading, professions } = useProfessions()
+    const professions = useSelector(getProfessions())
+    const professionsLoading = useSelector(getProfessionsLoadingStatus())
+
     const [currentPage, setCurrentPage] = useState(1)
     const [selectedProf, setSelectedProf] = useState()
     const [searchQuery, setSearchQuery] = useState('')
@@ -73,7 +79,7 @@ const UsersListPage = () => {
             ? data.filter(
                   (user) =>
                       JSON.stringify(user.profession) ===
-                      JSON.stringify(selectedProf)
+                      JSON.stringify(selectedProf._id)
               )
             : data
         return filteredUsers.filter((u) => u._id !== currentUser._id)

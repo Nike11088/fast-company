@@ -7,12 +7,15 @@ import SelectField from '../../common/form/selectField'
 import RadioField from '../../common/form/radioField'
 import MultiSelectField from '../../common/form/multiSelectField'
 import BackHistoryButton from '../../common/backButton'
-import { useProfessions } from '../../../hooks/useProfession'
 import { useAuth } from '../../../hooks/useAuth'
 import {
     getQualities,
     getQualitiesLoadingStatus
 } from '../../../store/qualities'
+import {
+    getProfessions,
+    getProfessionsLoadingStatus
+} from '../../../store/professions'
 
 const EditUserPage = () => {
     const history = useHistory()
@@ -24,9 +27,10 @@ const EditUserPage = () => {
 
     const qualities = useSelector(getQualities())
     const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
-
     const qualitiesList = transformData(qualities)
-    const { professions, isLoading: professionsLoading } = useProfessions()
+
+    const professions = useSelector(getProfessions())
+    const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const professionsList = transformData(professions)
 
     const handleSubmit = async (e) => {
