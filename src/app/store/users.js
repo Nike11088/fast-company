@@ -61,6 +61,9 @@ const usersSlice = createSlice({
                 state.entities[index] = action.payload
             }
         },
+        updateUserFailed: (state, action) => {
+            state.error = action.payload
+        },
         userLoggedOut: (state) => {
             state.entities = null
             state.isLoggedIn = false
@@ -82,6 +85,7 @@ const {
     authRequestFailed,
     userCreated,
     userUpdated,
+    updateUserFailed,
     userLoggedOut
 } = actions
 
@@ -89,7 +93,6 @@ const authRequested = createAction('users/authRequested')
 const userCreateRequseted = createAction('users/userCreateRequested')
 const createUserFailed = createAction('users/createUserFailed')
 const userUpdateRequseted = createAction('users/userUpdateRequseted')
-const updateUserFailed = createAction('users/updateUserFailed')
 
 export const login =
     ({ payload, redirect }) =>
