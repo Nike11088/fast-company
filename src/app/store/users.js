@@ -54,7 +54,6 @@ const usersSlice = createSlice({
             state.entities.push(action.payload)
         },
         userUpdated: (state, action) => {
-            console.log(action.payload)
             const index = state.entities.findIndex(
                 (user) => user._id === action.payload._id
             )
@@ -87,10 +86,10 @@ const {
 } = actions
 
 const authRequested = createAction('users/authRequested')
-const userCreateRequseted = createAction('user/userCreateRequested')
-const createUserFailed = createAction('user/createUserFailed')
-const userUpdateRequseted = createAction('user/userUpdateRequseted')
-const updateUserFailed = createAction('user/updateUserFailed')
+const userCreateRequseted = createAction('users/userCreateRequested')
+const createUserFailed = createAction('users/createUserFailed')
+const userUpdateRequseted = createAction('users/userUpdateRequseted')
+const updateUserFailed = createAction('users/updateUserFailed')
 
 export const login =
     ({ payload, redirect }) =>

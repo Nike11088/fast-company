@@ -5,7 +5,8 @@ import { useComments } from '../../hooks/useComments'
 import {
     getComments,
     getCommentsLoadingStatus,
-    loadCommentsList
+    loadCommentsList,
+    createComment
 } from '../../store/comments'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -13,16 +14,16 @@ import { useParams } from 'react-router-dom'
 const Comments = () => {
     const { userId } = useParams()
     const dispatch = useDispatch()
-    useEffect(() => {
-        console.log('loadCommentsList')
-        dispatch(loadCommentsList(userId))
-    }, [userId])
     const isLoading = useSelector(getCommentsLoadingStatus())
-    const { createComment, removeComment } = useComments()
+    const { removeComment } = useComments()
     const comments = useSelector(getComments())
 
+    useEffect(() => {
+        dispatch(loadCommentsList(userId))
+    }, [userId])
+
     const handleSubmit = (data) => {
-        createComment(data)
+        dispatch(createComment({ data, pageId: userId }))
     }
     const handleRemoveComment = (id) => {
         removeComment(id)
