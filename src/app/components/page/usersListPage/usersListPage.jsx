@@ -6,8 +6,6 @@ import GroupList from '../../common/groupList'
 import SearchStatus from '../../ui/searchStatus'
 import UserTable from '../../ui/usersTable'
 import UserPage from '../userPage/userPage'
-import { useUser } from '../../../hooks/useUsers'
-import { useAuth } from '../../../hooks/useAuth'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {
@@ -15,10 +13,11 @@ import {
     getProfessionsLoadingStatus
 } from '../../../store/professions'
 import { useSelector } from 'react-redux'
+import { getCurrentUserId, getUsersList } from '../../../store/users'
 
 const UsersListPage = () => {
     const params = useParams()
-    const { currentUser } = useAuth()
+    const currentUserId = useSelector(getCurrentUserId())
     const professions = useSelector(getProfessions())
     const professionsLoading = useSelector(getProfessionsLoadingStatus())
 
@@ -26,7 +25,7 @@ const UsersListPage = () => {
     const [selectedProf, setSelectedProf] = useState()
     const [searchQuery, setSearchQuery] = useState('')
     const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
-    const { users } = useUser()
+    const users = useSelector(getUsersList())
 
     useEffect(() => {
         setCurrentPage(1)
@@ -82,7 +81,7 @@ const UsersListPage = () => {
                       JSON.stringify(selectedProf._id)
               )
             : data
-        return filteredUsers.filter((u) => u._id !== currentUser._id)
+        return filteredUsers.filter((u) => u._id !== currentUserId)
     }
 
     if (userId) {

@@ -30,7 +30,9 @@ export const getProfessions = () => (state) => {
 }
 
 export const getProfessionById = (id) => (state) => {
-    return state.professions.entities.find((prof) => prof._id === id)
+    if (state.professions.entities) {
+        return state.professions.entities.find((prof) => prof._id === id)
+    }
 }
 
 export const getProfessionsLoadingStatus = () => (state) =>
