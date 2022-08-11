@@ -9,7 +9,7 @@ import ProtectedRoute from './components/common/protectedRoute'
 import LogOut from './layouts/logOut'
 import AppLoader from './components/ui/hoc/appLoader'
 // "apiEndpoint": "http://localhost:4000/api/v1/"
-
+// "apiEndpoint": "https://fast-company-firebase-912a1-default-rtdb.europe-west1.firebasedatabase.app/",
 const App = () => {
     return (
         <div>

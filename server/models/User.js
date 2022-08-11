@@ -16,7 +16,7 @@ const schema = new Schema(
         rate: Number,
         sex: {
             type: String,
-            enum: ['mail', 'female']
+            enum: ['male', 'female']
         }
     },
     {
